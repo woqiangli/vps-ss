@@ -1,0 +1,56 @@
+#centos
+
+#安装python、pip
+yum install python-setuptools
+easy_install pip
+
+#安装ss
+pip install shadowsocks
+
+#编辑ss配置文件
+vi /etc/shadowsocks.json
+{
+    "server":"0.0.0.0",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":{
+     "{port}":"{pwd}"
+    },
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open":false
+}
+
+# 启动
+ssserver -c /etc/shadowsocks.json -d start
+
+# 停止
+ssserver -c /etc/shadowsocks.json -d stop
+
+# 重新启动
+ssserver -c /etc/shadowsocks.json --log-file /tmp/ssserver.log -d start
+
+#ssserver开机自启
+在centos7中，/etc/rc.d/rc.local的权限被降低了，所以需要执行如下命令赋予其可执行权限
+chmod +x /etc/rc.d/rc.local
+vi /etc/rc.local
+ssserver -c /etc/shadowsocks.json --log-file /tmp/ssserver.log -d start
+
+#防火墙
+
+# 启动防火墙
+systemctl start firewalld
+
+#添加规则
+firewall-cmd --permanent --zone=public --add-port={port}/tcp
+firewall-cmd --permanent --zone=public  --add-port={port}/udp
+#加载配置
+firewall-cmd --reload
+
+
+#BBR
+wget –no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
+chmod +x bbr.sh
+./bbr.sh
+
+uname -r
