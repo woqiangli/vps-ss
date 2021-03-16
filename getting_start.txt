@@ -1,8 +1,13 @@
-#Shadowsocks-libev
+1.方式1
+#Snapd 安装
+https://blog.csdn.net/weixin_40479860/article/details/107823915
+
+#Shadowsocks-libev 安装
 https://gfw.report/blog/ss_tutorial/zh/
 
 #centos
 
+2.方式2
 #安装python、pip
 yum install python-setuptools
 easy_install pip
