@@ -1,3 +1,6 @@
+#Shadowsocks-libev
+https://gfw.report/blog/ss_tutorial/zh/
+
 #centos
 
 #安装python、pip
